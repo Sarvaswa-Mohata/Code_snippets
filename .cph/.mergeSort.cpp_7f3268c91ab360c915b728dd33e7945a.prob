@@ -1,0 +1,1 @@
+{"name":"Local: mergeSort","url":"c:\\Users\\asus\\Desktop\\OS\\Code_snippets\\mergeSort.cpp","tests":[{"id":1718697965352,"input":"1\n7\n3 2 1 1 9 6 5","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\asus\\Desktop\\OS\\Code_snippets\\mergeSort.cpp","group":"local","local":true}
