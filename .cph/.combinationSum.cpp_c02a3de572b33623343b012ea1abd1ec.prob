@@ -1,0 +1,1 @@
+{"name":"Local: combinationSum","url":"c:\\Users\\asus\\Desktop\\Code_snippets\\combinationSum.cpp","tests":[{"id":1718784393776,"input":"2\n2\n2 3\n6\n\n1\n5\n5","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\asus\\Desktop\\Code_snippets\\combinationSum.cpp","group":"local","local":true}
