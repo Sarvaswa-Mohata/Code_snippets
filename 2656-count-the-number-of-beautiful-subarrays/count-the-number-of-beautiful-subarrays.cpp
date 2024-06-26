@@ -1,7 +1,7 @@
 class Solution {
 public:
     long long solve(vector<int>& nums, int target){
-        map<long long,long long> mp;
+        unordered_map<long long,long long> mp;
         long long sum=0;
         long long cnt=0;
         for(int i=0;i<nums.size();i++){
