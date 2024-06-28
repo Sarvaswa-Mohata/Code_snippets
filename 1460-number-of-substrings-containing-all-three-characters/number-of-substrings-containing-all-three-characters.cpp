@@ -3,12 +3,12 @@ public:
     int numberOfSubstrings(string s) {
         int l=0, r=0, ans=0, tmp=0;
         int n=s.size();
-        map<char,int> mp;
+        vector<int> mp(3,0);
         while(r<n){
-            mp[s[r]]++;
-            while(mp['a']>=1 && mp['b']>=1 && mp['c']>=1){
+            mp[s[r]-'a']++;
+            while(mp[0]>=1 && mp[1]>=1 && mp[2]>=1){
                 //start shrinking
-                mp[s[l]]--;
+                mp[s[l]-'a']--;
                 l++;
             }
             ans+=l;
