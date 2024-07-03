@@ -2,16 +2,18 @@ class Solution {
 public:
     int func(vector<int>& nums){
         int n=nums.size();
-        vector<int> dp(n,-1);
-        dp[0] = max(nums[0],0);
+        int prv2 = max(nums[0],0);
+        int prv1=prv2;
         if(n>1)
-        dp[1] = max(nums[1],dp[0]);
+        prv1 = max(nums[1],prv2);
         for(int i=2;i<n;i++){
-            int pick = nums[i]+dp[i-2];
-            int not_pick = 0+dp[i-1];
-            dp[i] = max(pick,not_pick);
+            int pick = nums[i]+prv2;
+            int not_pick = 0+prv1;
+            int curr = max(pick,not_pick);
+            prv2 = prv1;
+            prv1 = curr;
         }
-        return dp[n-1];
+        return prv1;
     }
     int rob(vector<int>& nums) {
         return func(nums);
