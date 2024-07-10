@@ -1,15 +1,21 @@
 class Solution {
 public:
-    bool containsNearbyAlmostDuplicate(vector<int>& nums, int k, int t) {
-        multiset<int> mySet;
-        for(int i = 0; i<nums.size(); i++){
-        	auto lb = mySet.lower_bound(nums[i]-t);
-        	//lower_bound returns the iterator (the most near to value equals to nums[i] - t) , this is tricky
-        	if(lb!=mySet.end() && *lb - nums[i]<=t) return true;
-        	mySet.insert(nums[i]);
-        	if(mySet.size()>k) mySet.erase(nums[i-k]);
-
+    bool containsNearbyAlmostDuplicate(vector<int>& nums, int indexDiff, int valueDiff) {
+        multiset<int> ms;
+        int l=0, r=0; 
+        int n=nums.size();
+        while(r<n){
+            if(r-l>indexDiff){
+                ms.erase(nums[l]);
+                l++;
+            }
+            if(r>0){
+                auto it = ms.lower_bound(nums[r]-valueDiff);
+                if(it!=ms.end() && abs(*it-nums[r])<=valueDiff) {cout<<r<<endl;return true;}
+            }
+            ms.insert(nums[r]);
+            r++;
         }
-    return false;
+        return false;
     }
 };
