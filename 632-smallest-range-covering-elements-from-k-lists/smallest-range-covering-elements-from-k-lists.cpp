@@ -9,7 +9,7 @@ public:
         }
         sort(v.begin(),v.end());
         int k=nums.size();
-        map<int,int> mp;
+        unordered_map<int,int> mp;
         int l=0, r=0, n=v.size();
         int ans = INT_MAX;
         vector<int> tmp = {v[0].first,v[v.size()-1].first};
