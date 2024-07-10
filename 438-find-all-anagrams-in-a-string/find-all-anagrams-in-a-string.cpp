@@ -2,10 +2,10 @@ class Solution {
 public:
     vector<int> findAnagrams(string s, string p) {
         int l=0, r=0;
-        map<char,int> mp;
+        unordered_map<char,int> mp;
         int n=s.size();
         int k=p.size();
-        map<char,int> mp2;
+        unordered_map<char,int> mp2;
         for(auto it:p){
             mp2[it]++;
         }
