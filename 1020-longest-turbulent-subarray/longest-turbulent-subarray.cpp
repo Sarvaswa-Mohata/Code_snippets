@@ -23,7 +23,6 @@ public:
                 l=r-1;
             }
             ans = max(ans,r-l+1);
-            cout<<r<<","<<l<<" ";
             r++;
         }
         return ans;
