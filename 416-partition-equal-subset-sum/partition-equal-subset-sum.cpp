@@ -1,23 +1,19 @@
 class Solution {
 public:
-    bool helper(int i, int sum, vector<int>& nums, vector<vector<int>>& dp){
-        if(sum<0){
-            return false;
-        }
-        if(i<0){
-            return sum==0;
-        }
-        if(dp[i][sum]!=-1){
-            return dp[i][sum];
-        }
-        return dp[i][sum] = helper(i-1, sum-nums[i], nums,dp) | helper(i-1, sum, nums, dp);
-    }
     bool canPartition(vector<int>& nums) {
+        // if(nums.size()==1) return false;
         auto sum= accumulate(nums.begin(),nums.end(),0);
         if(sum%2==1){return false;}
-        sum/=2;
         int n=nums.size();
-        vector<vector<int>> dp(n, vector<int>(sum+1,-1));
-        return helper(n-1, sum, nums, dp);
+        vector<vector<bool>> dp(n, vector<bool>(sum+1,false));
+        sum/=2;
+        dp[0][0] = true;
+        dp[0][nums[0]] = true;
+        for(int i=1;i<n;i++){
+            for(int j=0;j<=sum;j++){
+                dp[i][j] =  (j>=nums[i]?dp[i-1][j-nums[i]]:false) | dp[i-1][j];
+            }
+        }
+        return dp[n-1][sum];
     }
 };
