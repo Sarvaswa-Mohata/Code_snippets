@@ -20,14 +20,14 @@ public:
                 return dp[ind1][ind2]=0;
             }
             if(p[ind2+1]=='*')
-            return helper(ind1, ind2+1, s, p, n, m, dp);
-            return helper(ind1+1, ind2+1, s, p, n, m, dp);
+            return dp[ind1][ind2]=helper(ind1, ind2+1, s, p, n, m, dp);
+            return dp[ind1][ind2]=helper(ind1+1, ind2+1, s, p, n, m, dp);
         }
         if(p[ind2]=='.'){
             if(ind2+1<m && p[ind2+1]=='*'){
-                return helper(ind1, ind2+1, s, p, n, m, dp);
+                return dp[ind1][ind2]=helper(ind1, ind2+1, s, p, n, m, dp);
             }
-            return helper(ind1+1, ind2+1, s, p, n, m, dp);
+            return dp[ind1][ind2]=helper(ind1+1, ind2+1, s, p, n, m, dp);
         }
         if(p[ind2]=='*'){
             bool ans = false;
@@ -41,8 +41,8 @@ public:
             else{
                 auto it = p[ind2-1];
                 while(ind1<n && s[ind1]==it){
+                    ans|=helper(ind1+1, ind2+1, s, p, n, m, dp); //matching 1 or more chars
                     ind1++;
-                    ans|=helper(ind1, ind2+1, s, p, n, m, dp); //matching 1 or more chars
                 }
             }
             return dp[ind1][ind2] = ans;
