@@ -29,7 +29,31 @@ public:
         return false;
     }
     bool isMatch(string s, string p) {
-        vector<vector<int>> dp(s.size()+1, vector<int>(p.size()+1, -1));
-        return helper(0,0,s,p,s.size(),p.size(),dp);   
+        vector<vector<int>> dp(s.size()+1, vector<int>(p.size()+1, 0));
+        int n=s.size();
+        int m=p.size();
+        dp[n][m] = 1;
+        for(int j=m-1;j>=0;j--){
+            if(p[j]=='*') dp[n][j]=1;
+            else break;
+        }
+        for(int i=n-1;i>=0;i--){
+            for(int j=m-1;j>=0;j--){
+                if(p[j]!='*' && p[j]!='?'){
+                    if(p[j]==s[i])
+                        dp[i][j] = dp[i+1][j+1];
+                    else
+                        dp[i][j] = 0;
+                }
+                else if(p[j]=='?'){
+                    dp[i][j] = dp[i+1][j+1];
+                }
+                else{
+                    for(int k=n; k>=i;k--)
+                    dp[i][j]|= dp[k][j+1];
+                }
+            }
+        }
+        return dp[0][0];  
     }
 };
