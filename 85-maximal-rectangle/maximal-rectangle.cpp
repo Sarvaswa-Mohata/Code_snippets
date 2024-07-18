@@ -1,28 +1,25 @@
 class Solution {
 public:
-int largestArea(vector<int>& heights) {
-    stack<pair<int, int>> st; // Stack to store pairs of (height, width)
-    int ans = 0; // Initialize answer to 0 (since areas cannot be negative)
-
-    for (int i = 0; i < heights.size(); i++) {
-        int width = 0;
-        while (!st.empty() && st.top().first >= heights[i]) {
-            width += st.top().second; // Accumulate the width
-            ans = max(ans, st.top().first * width); // Calculate area with top height
+    int largestArea(vector<int>& v){
+        stack<pair<int,int>> st;
+        int ans=0;
+        for(int i=0;i<v.size();i++){
+            int tmp=0;
+            while(!st.empty() && st.top().first>=v[i]){
+                tmp+=st.top().second;
+                ans = max(ans, st.top().first*tmp);
+                st.pop();
+            }
+            st.push({v[i], tmp+1});
+        }
+        int tmp2=0;
+        while(!st.empty()){
+            tmp2+=st.top().second;
+            ans = max(ans, tmp2*st.top().first);
             st.pop();
         }
-        st.push({heights[i], width + 1}); // Push current height with accumulated width + 1
+        return ans;
     }
-
-    int accumulatedWidth = 0;
-    while (!st.empty()) {
-        accumulatedWidth += st.top().second; // Accumulate the width
-        ans = max(ans, st.top().first * accumulatedWidth); // Calculate area with top height
-        st.pop();
-    }
-
-    return ans;
-}
     int maximalRectangle(vector<vector<char>>& matrix) {
         int ans=INT_MIN;
         vector<int> tmp;
