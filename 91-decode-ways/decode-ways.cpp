@@ -10,23 +10,20 @@ public:
         auto it=(s[ind]-'0')*10+(s[ind+1]-'0');
         return (it<=26 && it>=10);
     }
-    int helper(int ind, string& s, vector<int>& dp){
-        if(ind==s.size()) return 1;
-        //ek char ya do char:
-        if(dp[ind]!=-1){
-            return dp[ind];
-        }
-        int ans=0;
-        if(test1(ind, s)){
-            ans+=helper(ind+1, s, dp);
-        }
-        if(test2(ind, s)){
-            ans+=helper(ind+2, s, dp);
-        }
-        return dp[ind] = ans;
-    }
     int numDecodings(string s) {
-        vector<int> dp(s.size()+1, -1);
-        return helper(0,s,dp);
+        int n=s.size();
+        vector<int> dp(n+1, 0);
+        dp[n]=1;
+        for(int i=n-1;i>=0;i--){
+            int ans=0;
+            if(test1(i, s)){
+                ans+=dp[i+1];
+            }
+            if(test2(i, s)){
+                ans+=dp[i+2];
+            }
+            dp[i] = ans;
+        }
+        return dp[0];
     }
 };
