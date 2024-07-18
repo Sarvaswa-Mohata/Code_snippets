@@ -35,7 +35,6 @@ public:
             }
             tmp=v;
             auto it = largestArea(v);
-            cout<<endl;
             ans = max(ans, it);
         }
         return ans;
